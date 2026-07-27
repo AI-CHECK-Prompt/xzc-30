@@ -233,8 +233,13 @@ public class TradingService {
 
         updateQuotasForTrade(trade);
 
+        // 取消被成交的原始挂单
         sellOrder.setOrderStatus(ORDER_STATUS_CANCELLED);
         orderRepository.save(sellOrder);
+
+        // 取消匹配方的原始挂单
+        matchOrder.setOrderStatus(ORDER_STATUS_CANCELLED);
+        orderRepository.save(matchOrder);
 
         riskMonitorService.checkPositionConcentration(trade.getBuyer().getId());
 
