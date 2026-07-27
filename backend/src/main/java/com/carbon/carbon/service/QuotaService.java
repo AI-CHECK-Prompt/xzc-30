@@ -161,8 +161,11 @@ public class QuotaService {
         BigDecimal surrendered = quota.getSurrendered() != null ?
             quota.getSurrendered() : BigDecimal.ZERO;
 
-        return initial.add(additional).add(tradedIn)
+        BigDecimal balance = initial.add(additional).add(tradedIn)
             .subtract(tradedOut).subtract(offset).subtract(surrendered);
+        
+        // 确保配额余额不低于零（配额不能为负）
+        return balance.compareTo(BigDecimal.ZERO) < 0 ? BigDecimal.ZERO : balance;
     }
 
     private void updateCompanyQuota(Long companyId, BigDecimal quotaHeld) {
