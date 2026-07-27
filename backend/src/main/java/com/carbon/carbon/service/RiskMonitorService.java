@@ -3,6 +3,7 @@ package com.carbon.carbon.service;
 import com.carbon.carbon.entity.CarbonOrder;
 import com.carbon.carbon.entity.Company;
 import com.carbon.carbon.entity.RiskAlert;
+import com.carbon.carbon.repository.CarbonOrderRepository;
 import com.carbon.carbon.repository.CompanyRepository;
 import com.carbon.carbon.repository.RiskAlertRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class RiskMonitorService {
 
     @Autowired
     private RiskAlertRepository riskAlertRepository;
+
+    @Autowired
+    private CarbonOrderRepository carbonOrderRepository;
 
     @Autowired
     private CompanyRepository companyRepository;
@@ -77,10 +81,7 @@ public class RiskMonitorService {
 
     public void checkAbnormalTradingBehavior(Long companyId) {
         LocalDateTime windowStart = LocalDateTime.now().minusHours(TRADING_FREQUENCY_WINDOW_HOURS);
-        List<CarbonOrder> recentOrders = riskAlertRepository.findByAlertTimeBetween(windowStart, LocalDateTime.now())
-            .stream()
-            .filter(a -> a.getCompany() != null && a.getCompany().getId().equals(companyId))
-            .toList();
+        List<CarbonOrder> recentOrders = carbonOrderRepository.findByCompanyIdAndOrderTimeAfter(companyId, windowStart);
 
         if (recentOrders.size() > TRADING_FREQUENCY_THRESHOLD) {
             companyRepository.findById(companyId).ifPresent(company ->
