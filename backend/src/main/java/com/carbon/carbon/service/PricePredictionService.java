@@ -212,4 +212,30 @@ public class PricePredictionService {
 
         return Math.sqrt(variance) / mean;
     }
+
+    /**
+     * 获取外部因子对价格的影响分析
+     */
+    public Map<String, Object> analyzeExternalFactorImpact() {
+        Map<String, Object> impact = new HashMap<>();
+        impact.put("hasExternalFactors", true);
+        impact.put("description", "外部因子分析功能待集成Python预测服务后完善");
+        return impact;
+    }
+
+    /**
+     * 综合预测（融合内部+外部数据）
+     */
+    public Map<String, Object> comprehensivePrediction() {
+        Map<String, Object> prediction = predictPriceRange();
+
+        // 添加外部因子分析
+        Map<String, Object> factorImpact = analyzeExternalFactorImpact();
+        prediction.put("externalFactorImpact", factorImpact);
+
+        // 添加趋势分析
+        prediction.put("trendAnalysis", analyzePriceTrend());
+
+        return prediction;
+    }
 }
