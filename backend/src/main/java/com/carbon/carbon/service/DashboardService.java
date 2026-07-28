@@ -76,7 +76,7 @@ public class DashboardService {
                 .map(Company::getTotalEmissions)
                 .filter(Objects::nonNull)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
-            data.put("totalEmissions", totalEmissions);
+            data.put("totalEmissions", totalEmissions != null ? totalEmissions : BigDecimal.ZERO);
 
             distribution.add(data);
         }
