@@ -86,6 +86,7 @@ public class CompanyService {
             power.setName("电力");
             power.setDescription("发电企业");
             power.setStatus("ACTIVE");
+            power.setIntensityBase(new BigDecimal("1.0000"));
             industryRepository.save(power);
 
             Industry steel = new Industry();
@@ -93,6 +94,7 @@ public class CompanyService {
             steel.setName("钢铁");
             steel.setDescription("钢铁生产企业");
             steel.setStatus("ACTIVE");
+            steel.setIntensityBase(new BigDecimal("1.6000"));
             industryRepository.save(steel);
 
             Industry cement = new Industry();
@@ -100,6 +102,7 @@ public class CompanyService {
             cement.setName("水泥");
             cement.setDescription("水泥生产企业");
             cement.setStatus("ACTIVE");
+            cement.setIntensityBase(new BigDecimal("0.8900"));
             industryRepository.save(cement);
 
             Industry aluminum = new Industry();
@@ -107,6 +110,7 @@ public class CompanyService {
             aluminum.setName("电解铝");
             aluminum.setDescription("电解铝生产企业");
             aluminum.setStatus("ACTIVE");
+            aluminum.setIntensityBase(new BigDecimal("13.9000"));
             industryRepository.save(aluminum);
 
             Industry petrochemical = new Industry();
@@ -114,6 +118,7 @@ public class CompanyService {
             petrochemical.setName("石化");
             petrochemical.setDescription("石化生产企业");
             petrochemical.setStatus("ACTIVE");
+            petrochemical.setIntensityBase(new BigDecimal("1.0000"));
             industryRepository.save(petrochemical);
 
             Industry chemical = new Industry();
@@ -121,6 +126,7 @@ public class CompanyService {
             chemical.setName("化工");
             chemical.setDescription("化工生产企业");
             chemical.setStatus("ACTIVE");
+            chemical.setIntensityBase(new BigDecimal("2.8000"));
             industryRepository.save(chemical);
 
             Industry paper = new Industry();
@@ -128,6 +134,7 @@ public class CompanyService {
             paper.setName("造纸");
             paper.setDescription("造纸生产企业");
             paper.setStatus("ACTIVE");
+            paper.setIntensityBase(new BigDecimal("0.8000"));
             industryRepository.save(paper);
 
             Industry aviation = new Industry();
@@ -135,6 +142,7 @@ public class CompanyService {
             aviation.setName("航空");
             aviation.setDescription("航空运输企业");
             aviation.setStatus("ACTIVE");
+            aviation.setIntensityBase(new BigDecimal("1.0000"));
             industryRepository.save(aviation);
         }
     }

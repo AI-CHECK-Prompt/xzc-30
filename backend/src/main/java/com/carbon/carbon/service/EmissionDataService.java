@@ -99,9 +99,14 @@ public class EmissionDataService {
 
     public void calculateEmissionIntensity(Long dataId) {
         emissionDataRepository.findById(dataId).ifPresent(data -> {
-            if (data.getTotalEmissions() != null) {
+            if (data.getTotalEmissions() != null && data.getCompany() != null) {
+                BigDecimal base = BigDecimal.ONE;
+                if (data.getCompany().getIndustry() != null
+                        && data.getCompany().getIndustry().getIntensityBase() != null) {
+                    base = data.getCompany().getIndustry().getIntensityBase();
+                }
                 BigDecimal intensity = data.getTotalEmissions()
-                    .divide(BigDecimal.ONE, 6, RoundingMode.HALF_UP);
+                    .divide(base, 6, RoundingMode.HALF_UP);
                 data.setEmissionIntensity(intensity);
                 emissionDataRepository.save(data);
             }

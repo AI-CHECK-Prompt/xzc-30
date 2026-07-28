@@ -1,6 +1,7 @@
 package com.carbon.carbon.entity;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "t_industry")
@@ -21,6 +22,9 @@ public class Industry {
 
     @Column(length = 20)
     private String status;
+
+    @Column(precision = 18, scale = 6)
+    private BigDecimal intensityBase;
 
     public Long getId() {
         return id;
@@ -60,5 +64,13 @@ public class Industry {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public BigDecimal getIntensityBase() {
+        return intensityBase;
+    }
+
+    public void setIntensityBase(BigDecimal intensityBase) {
+        this.intensityBase = intensityBase;
     }
 }
