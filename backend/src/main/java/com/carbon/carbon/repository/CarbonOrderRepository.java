@@ -37,4 +37,7 @@ public interface CarbonOrderRepository extends JpaRepository<CarbonOrder, Long> 
 
     @Query("SELECT SUM(o.totalAmount) FROM CarbonOrder o WHERE o.orderStatus = 'COMPLETED' AND o.orderTime >= :startTime")
     Double calculateTotalTradingVolume(@Param("startTime") LocalDateTime startTime);
+
+    @Query("SELECT SUM(o.quantity) FROM CarbonOrder o WHERE o.orderStatus = 'COMPLETED' AND o.orderTime >= :startTime")
+    Double calculateTotalQuantity(@Param("startTime") LocalDateTime startTime);
 }

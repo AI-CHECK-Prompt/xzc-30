@@ -47,7 +47,7 @@ public class DashboardService {
 
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime startOfDay = now.withHour(0).withMinute(0).withSecond(0);
-        Double todayVolume = orderRepository.calculateTotalTradingVolume(startOfDay);
+        Double todayVolume = orderRepository.calculateTotalQuantity(startOfDay);
         overview.put("todayVolume", todayVolume != null ? todayVolume : 0);
 
         Double avgPrice = orderRepository.calculateAveragePrice(startOfDay);
