@@ -123,7 +123,12 @@ public class DashboardService {
             .filter(c -> "NON_COMPLIANT".equals(c.getComplianceStatus()))
             .count();
 
-        long pending = total - compliant - nonCompliant;
+        long pending = allCompanies.stream()
+            .filter(c -> {
+                String status = c.getComplianceStatus();
+                return status == null || (!"COMPLIANT".equals(status) && !"NON_COMPLIANT".equals(status));
+            })
+            .count();
 
         progress.put("total", total);
         progress.put("compliant", compliant);
